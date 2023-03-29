@@ -1,7 +1,10 @@
+// function calculadora(operation) {
+//   return function newOperation(a, b) {
+//     return operation(a, b);
+//   };
+// }
 function calculadora(operation) {
-  return function newOperation(a, b) {
-    return operation(a, b);
-  };
+  return (a, b) => operation(a, b);
 }
 
 const sum = calculadora((a, b) => a + b);
