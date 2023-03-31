@@ -1,9 +1,5 @@
 # Anotações das aulas do Pré-Work
 
-https://youtu.be/E8XpsKvmAjw?list=PLF7Mi9HNzvVk05NdZnB44rccbg_dnWuMh&t=11899
-
-#
-
 #### O innerHTML faz a transformação para um código HTML. Ou seja, atribuindo um elemento com _.innerHTML_, seu valor deve ser uma tag e isso será transformado em código HTML.
 
 Exemplo a seguir criando uma tag de título com um texto estático:
@@ -101,7 +97,7 @@ const newProduct = {
 
 ```javascript
 Object.entries(product).map(entry => {
-  return `$[entry[0] : $[entry[1]`
+  return `${entry[0]} : ${entry[1]}`
 })
 ```
 
@@ -112,3 +108,86 @@ Object.entries(product).map(([key, value]) => {
   return `${key} : ${value}`
 })
 ```
+
+#### O insertAdjacentHTML é uma função mais rápida se comparada ao innerHTML(), e recebe dois argumentos, sendo o segundo argumento o elemento, ou seja, o que será adicionado e o primeiro argumento é a posição que deve ser inserido o elemento, ou seja, onde o elemento será posicionado podendo ser as seguintes:
+
+- _beforebegin_ = antes do início do elemento
+- _afterend_ = depois do fim do elemento
+
+- _afterbegin_ = depois do início do elemento, dentro da tag(mesma ideia do prepend)
+- _beforeend_ = antes do fim, dentro da tag
+
+Exemplo:
+
+```javascript
+app.inserAdjacentHTML('beforebegin', img)
+```
+
+#### Dentro do contexto do _insertAdjacent_, quando criado um elemento e adicionado um outro elemento dentro do primeiro através de appendchild, faz-se necessário a utilização do outerHTML, pois se utilizado o innerHTML somente o elemento de dentro seria adicionado. Sendo assim, para adicionar os dois elementos usa-se outerHTML. Além disso, é importante dizer que o outerHTML retorna uma string do objeto (elemento), da mesma forma que o innerHTML deve receber uma string da tag. Exemplo:
+
+```javascript
+const app = document.querySelector('[data-js="app"]')
+
+const div = document.createElement('div')
+const img = document.createElement('img')
+div.appendChild(img) // nesse caso, muda-se o elemento de origem
+
+app.insertAdjacentHTML('beforeend', div.outerHTML)
+```
+
+#### Para substituir um elemento por outro, basta fazer da seguinte forma:
+
+```javascript
+app.replaceChild(document.createElement('elementoNovo', elementoAntigo))
+```
+
+#### 💡 **Dicas:**
+
+- _setAttribute_, seta um novo atributo no elemento e recebe como argumento: o nome do atributo e como segundo argumento o valor do atributo.
+- _getAttribute_, retorna o valor do atributo, possui um argumento que deve ser informado o nome do atributo que deseja ser retornado o valor.
+- Uma alternativa para retorno de valor de atributo, é utilizar o `dataset.'nomedata'`, por exemplo se o nome do atributo for 'data-js' o dataset deve ser dataset.js e ele retornará o valor do atributo data.js.
+
+**SOBRE FORMULÁRIO** 📋
+
+#### Para fazer manipulação de valores, ou atribuir eventos em inputs do tipo checkbok é necessário percorrer através do forEach adicionando o evento, isso se tratando de um gerenciamento manual. Da mesma maneira, funciona os inputs do tipo radio. Como por exemplo:
+
+```javascript
+const checkboxes = document.querySelectorAll('[data-js="lang"]')
+
+//todos os checkbox no HTML contém o atributo data-js="lang"
+
+checkboxes.forEach((checkbox) => {
+checkbox.addEventListener('click', (e) => {
+e.target.value = retorna o valor da label
+e.target.checked = retorna um boolean se foi selecionado ou não
+})
+})
+```
+
+#### Entretanto, nos casos das options do select, faz-se necessário a utilização do evento 'change', como abaixo:
+
+```javascript
+const langSelect = document.querySelectorAll('[data-js="lang-select"]')
+
+langSelect.addEventListener('change', (e) => {
+e.target.value // irá retornar o valor da option que foi selecionada
+})
+
+Para obter mais de um valor dos options selecionados, é preciso mapear as options as transformando em um array. Da seguinte maneira é possível fazer isso retornando um objeto com os valores e as seleções:
+
+langSelect.addEventListener('change' , (e) =>
+[...e.target.options].map(el) => ({
+value: el.value,
+selected: el.selected,
+}))
+```
+
+#### Ou então, somente retornando o valor dos elementos selecionados:
+
+```javascript
+langSelect.addEventListener('change', e => {
+  ;[...e.target.selectedOptions].map(el => el.value)
+})
+```
+
+#### 💡 **Dica:** Além de utilizar o spread, também poderia ser utilizado o Array.from(), que transforma em array os dados que se parecem com um array, ou seja, dados que possuem length e são organizados de maneira númerica, como por exemplo: nodeList, HTMLCollection. Para assim, utilizar métodos de array, como reduce, filter, map.
