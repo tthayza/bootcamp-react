@@ -1,5 +1,6 @@
 const inputName = document.querySelector('[data-js="inputName"]');
-
+const area = document.querySelector('[data-js="area"]');
+const colorsSelect = document.querySelector('[data-js="colors-select"');
 inputName.addEventListener("input", (e) => {
   e.target.value = returnFirstUpper(inputName.value);
 });
@@ -16,3 +17,12 @@ const returnFirstUpper = (name) => {
   }
   return formatedName.join(" ");
 };
+
+colorsSelect.addEventListener("change", (e) => {
+  area.innerHTML = "";
+  [...e.target.selectedOptions].map((el) => {
+    const div0 = document.createElement("div");
+    div0.style.backgroundColor = el.value.toLowerCase();
+    area.appendChild(div0);
+  });
+});

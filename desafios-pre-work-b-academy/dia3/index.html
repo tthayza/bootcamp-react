@@ -2,15 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/style.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dia 3</title>
   </head>
   <body>
     <script type="module" src="/src/main.js"></script>
-    <form action="">
+    <form action="" data-js="form">
       <label for="username" value="thajaja lalaa da jjsj">Nome</label>
       <input type="text" id="username" data-js="inputName" />
+
+      <select name="colors-select" data-js="colors-select" id="" multiple>
+        <option value="Crimson">Crimson</option>
+        <option value="Salmon">Salmon</option>
+        <option value="LightPink">LightPink</option>
+        <option value="CornFlowerBlue">CornFlowerBlue</option>
+        <option value="DarkCyan">DarkCyan</option>
+      </select>
     </form>
+    <section data-js="area"></section>
   </body>
 </html>
