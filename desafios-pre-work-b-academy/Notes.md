@@ -191,3 +191,11 @@ langSelect.addEventListener('change', e => {
 ```
 
 #### 💡 **Dica:** Além de utilizar o spread, também poderia ser utilizado o Array.from(), que transforma em array os dados que se parecem com um array, ou seja, dados que possuem length e são organizados de maneira númerica, como por exemplo: nodeList, HTMLCollection. Para assim, utilizar métodos de array, como reduce, filter, map.
+
+#
+
+#### **Promises**, é um novo tipo de dado que foi inserido no EcmaScript 6.
+
+#### **Código Síncrono** é um código que é lido uma linha abaixo da outra, da mesma forma que aparece.
+
+#### **Código Assíncrono** é um código que é enviado para a _thread_ chamada **event loop**, que é um lugar onde todo código assíncrono ou códigos que podem demorar a serem processados são enviados. O **event loop** envia para uma outra _thread_ para que a informação seja processada, depois desse processamento o **event loop** recebe a informação processada e encaminha para a _thread_ principal. Ou seja, o **event loop** recebe e retorna uma informação por vez. Esse tipo de código pode ser feito dentro de um `setInterval` ou `setTimeOut`.
