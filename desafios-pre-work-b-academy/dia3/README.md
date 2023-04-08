@@ -43,15 +43,3 @@ Crie também uma tabela no HTML que irá receber os dados dos carros criados.
 Ao preencher todos os dados e submeter o formulário, você deve criar uma nova linha na tabela
 com os dados do carro criado, limpar o formulário para receber um novo cadastro, e dar foco no primeiro campo
 do formulário (campo imagem).
-
-#### Fetch api retorna o tipo de dado promise, no qual a ideia é de que o código seja assíncrono com uma interface padronizada, e essa é a maior vantagem de utilizar promise.
-
-#### A promise é construída utilizando o new promise, da seguinte forma:
-
-#### Vale ressaltar que dentro de promises não se utiliza `return`
-
-a promise utiliza o resolve no callback, e dentro da função se utiliza o resolve passando o valor que deseja ser resolvido, onde é esperado um único argumento.
-
-#### Para consumir o valor da promise, faz-se necessário o uso do then que funciona como o eventListener, mas o then fica "ouvindo" quando a promise será resolvida e a função dentro do then só será resolvida quando o resolve da promise for chamado. Além disso, o then sempre irá retornar uma promise, podendo então ser encadeado em outro then. Sendo assim:
-
-##### **CallBack Hell** se refere ao encadeamento e dependências de promises, ou seja, uma promise após ser resolvida chama outra promise, e assim sucessivamente. Vale destacar que uma promise também retorna uma outra promise. vi

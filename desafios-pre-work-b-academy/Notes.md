@@ -194,8 +194,45 @@ langSelect.addEventListener('change', e => {
 
 #
 
-#### **Promises**, é um novo tipo de dado que foi inserido no EcmaScript 6.
+### **Promises**
+
+#### Se trata de um novo tipo de dado que foi inserido no EcmaScript 6. Mas antes de falar sobre promises, é importante entender a diferença entre código síncrono e código assíncrono:
 
 #### **Código Síncrono** é um código que é lido uma linha abaixo da outra, da mesma forma que aparece.
 
 #### **Código Assíncrono** é um código que é enviado para a _thread_ chamada **event loop**, que é um lugar onde todo código assíncrono ou códigos que podem demorar a serem processados são enviados. O **event loop** envia para uma outra _thread_ para que a informação seja processada, depois desse processamento o **event loop** recebe a informação processada e encaminha para a _thread_ principal. Ou seja, o **event loop** recebe e retorna uma informação por vez. Esse tipo de código pode ser feito dentro de um `setInterval` ou `setTimeOut`.
+
+#### Fazendo utilização do **Fetch API**, o retorno é o tipo de dado promise, no qual a ideia é de que o código seja assíncrono com uma interface padronizada, e essa é a maior vantagem de utilizar promise. E vale ressaltar que dentro de promises não se utiliza `return`.
+
+#### Então, a promise é construída utilizando o new promise, da seguinte forma:
+
+```javascript
+const promise = new Promise()
+```
+
+#### A promise espera que seja passada uma função que é executada de forma síncrona, então:
+
+```javascript
+const promise = new Promise(() => {
+  console.log('promise')
+})
+```
+
+#### A promise utiliza o **resolve()** no callback, e dentro da função se utiliza o resolve passando como argumento o valor que deseja ser resolvido, e é esperado um único argumento.
+
+#### Para consumir o valor da promise, faz-se necessário o uso do **then()** que funciona como o **eventListener**, mas o then() fica "ouvindo" quando a promise será resolvida e a função dentro do then() só será resolvida quando o resolve da promise for chamado. Além disso, o then() sempre irá retornar uma promise, podendo então ser encadeado em outro then(). Sendo assim:
+
+```javascript
+const promise = new Promise(resolve => {
+  resolve({ a: 1 })
+  promise.then(valorResolvido => {
+    console.log('valor da promise:', valorResolvido.a) // 1
+  })
+})
+```
+
+#### **CallBack Hell** se refere ao encadeamento e dependências de promises, ou seja, uma promise após ser resolvida chama outra promise, e assim sucessivamente. Vale destacar que uma promise também retorna uma outra promise.
+
+### **Tratando erros em Promises**
+
+#### Quando a promise não é resolvida, ocorre um erro e da mesma forma que o resolve(), é possível utilizar o **reject()**. Com o reject(), ao invés de utilizar o then(), será utilizado o **catch()** que também retorna uma promise, e pega o erro.
