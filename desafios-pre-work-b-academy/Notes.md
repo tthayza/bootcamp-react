@@ -236,3 +236,51 @@ const promise = new Promise(resolve => {
 ### **Tratando erros em Promises**
 
 #### Quando a promise não é resolvida, ocorre um erro e da mesma forma que o resolve(), é possível utilizar o **reject()**. Com o reject(), ao invés de utilizar o then(), será utilizado o **catch()** que também retorna uma promise, e pega o erro.
+
+### **Async e Await**
+
+#### É um _sintax sugar_ para promise, é uma outra maneira de escrever a promise mas por baixo dos panos o JavaScript trata como promise.
+
+```javascript
+async function asyncFunction() {
+  return 1
+}
+```
+
+#### ou então:
+
+```javascript
+const asyncFunction2 = async () => {
+  return 2
+}
+```
+
+#### Então, implicitamente apenas inserindo a palavra reservada `async` será retornada uma _promise_, no qual o return será tratado como o resolve(). Sendo assim, para consumir o valor da _promise_ é necessário utilizar o then() da seguinte maneira:
+
+```javascript
+asyncFunction().then(result => console.log('result:', result))
+```
+
+#### A palavra-chave `await` aguarda a resolução da _promise_, então para utilizar o await é necessário obrigatoriamente estar dentro de uma função async. E em seguida da palavra await passa-se a _promise_ que se está esperando a resolução.
+
+### **Fetch API**
+
+#### Fetch API é uma API que nos permite comunicação com o servidor por meio do protocolo HTTP e utiliza sintaxe de _promises_. O fetch verifica se uma requisição está ok e se o ok for igual a **true** significa então que o endereço passado no fetch tem permissão para realizar request e fazer busca de dados desse servidor. Então, pode-se trazer o resultado com o método `json` que será uma _promise_. Sendo assim, é necessário utilizar um novo then() para manipular o resultado. Ou seja:
+
+```javascript
+fetch(url).then(result => result.json())
+```
+
+#### Para realizar um **POST** com fetch é necessário como primeiro argumento a url sendo a rota para qual será feita o request, e em seguida é passado um objeto com algumas opções como:
+
+```javascript
+fetch(url , {
+  method: 'POST',
+  headers: {
+  'content-type':'application/json',
+  },
+  body: JSON.stringfy({
+  'aqui ficam os dados que devem ser enviados'
+  })
+})
+```
