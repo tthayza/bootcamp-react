@@ -6,3 +6,92 @@ body {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+label {
+  color: darksalmon;
+}
+
+input {
+  font-weight: 600;
+  background-color: linen;
+  color: orangered;
+  height: 35px;
+  border-radius: 35px;
+  border: double darksalmon 5px;
+  width: 30%;
+  padding: 8px;
+  margin: 20px;
+}
+
+section h1 {
+  color: coral;
+}
+
+input:focus {
+  border: solid 3px salmon;
+}
+
+button {
+  margin: 15px;
+  width: 15%;
+  padding: 10px;
+
+  font-size: 18px;
+  background-color: darksalmon;
+  color: whitesmoke;
+  border: none;
+  border-radius: 35px;
+
+  transition: 0.4s ease-in-out;
+}
+
+button:hover {
+  letter-spacing: 1px;
+  transition: 0.2s linear;
+  cursor: pointer;
+  background-color: snow;
+  color: salmon;
+}
+.datas {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border: 2px solid salmon;
+  border-collapse: collapse;
+  width: 30%;
+  margin: 25px;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: salmon;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: whitesmoke;
+}
+
+table tr:nth-child(odd) {
+  background-color: white;
+}
+
+table tr td {
+  border: 1px solid salmon;
+  color: darksalmon;
+}
