@@ -14,6 +14,29 @@ const showError = (message) => {
   section.insertAdjacentElement("beforebegin", element);
 };
 
+const removeCar = (plate, row) => {
+  console.log(plate);
+  fetch("http://localhost:3333/cars", {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      plate: plate,
+    }),
+  }).then((res) => {
+    res.json().then((data) => {
+      const table = document.querySelector('[data-js="cars-table"]');
+      table.deleteRow(row);
+      const section = document.querySelector('[data-js="first-form"]');
+      const element = document.createElement("h1");
+      element.textContent = data.message;
+      section.insertAdjacentElement("beforebegin", element);
+      updateTable();
+    });
+  });
+};
+
 const updateTable = async () => {
   cars = await getCars();
   const table = document.querySelector('[data-js="cars-table"]');
@@ -47,6 +70,13 @@ const updateTable = async () => {
 
       const cell5 = row.insertCell(4);
       cell5.innerHTML = car.color;
+
+      const cell6 = row.insertCell(5);
+      const button = document.createElement("button");
+      button.classList.add("remove");
+      button.addEventListener("click", () => removeCar(car.plate, row));
+      button.textContent = "Excluir";
+      cell6.appendChild(button);
     });
   }
 };
