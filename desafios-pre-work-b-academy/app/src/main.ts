@@ -5,6 +5,7 @@ const url = 'http://localhost:3333/cars'
 const form = document.querySelector('[data-js="cars-form"]')
 const table = document.querySelector('[data-js="table"]')
 
+
 type dataRow = {
   image: string;
   brandModel: string,
@@ -13,8 +14,12 @@ type dataRow = {
   color: string
 }
 
-const getFormElement = (event: SubmitEvent) => (elementName : string) => {
-  return event.target?.elements[elementName]
+const getFormElement = (event: Event) => (elementName: HTMLElement) => {
+   if (event.target) {
+    (event.target as HTMLElement).elements[elementName]
+
+   }
+
 }
 
 const elementTypes = {
@@ -23,7 +28,7 @@ const elementTypes = {
   color: createColor,
 }
 
-function createImage (data: string) {
+function createImage (data: HTMLImageElement) {
   const td = document.createElement('td')
   const img = document.createElement('img')
   img.src = data.src
@@ -79,10 +84,10 @@ form?.addEventListener('submit', async (e) => {
   createTableRow(data)
 
   e.target?.reset()
-  Image.focus()
+  document.getElementById('image')?.focus()
 })
 
-function createTableRow (data:dataRow) {
+function createTableRow (data: dataRow) {
   const elements = [
     { type: 'image', value: { src: data.image, alt: data.brandModel } },
     { type: 'text', value: data.brandModel },
@@ -121,8 +126,9 @@ async function handleDelete (e) {
     return
   }
 
-  const tr = document.querySelector(`tr[data-plate="${plate}"]`)
-  table?.removeChild(tr)
+  const tr= document.querySelector(`tr[data-plate="${plate}"]`)
+  if (tr) table?.removeChild(tr)
+
   button.removeEventListener('click', handleDelete)
 
   const allTrs = table?.querySelector('tr')
